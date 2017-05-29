@@ -1,0 +1,64 @@
+﻿@model StudentsApp.Models.CourseList
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>CourseList</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Course.CourseName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Course.CourseName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Student.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Student.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Durtation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Durtation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HolidayStartDay)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HolidayStartDay)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HolidayEndDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HolidayEndDate)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
