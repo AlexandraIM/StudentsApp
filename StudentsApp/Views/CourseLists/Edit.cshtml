@@ -18,47 +18,49 @@
         @Html.HiddenFor(model => model.Id)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Course.CourseName, "Course Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CourseId, "Course Name", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("Course Name", new SelectList(Model.Course.CourseName), htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Course.CourseName, "", new { @class = "text-danger" })
+                @Html.DropDownList("CourseId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CourseId, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Student.FullName, "Student Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.StudentId, "Student Name", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("Student Name", new SelectList(Model.Student.FullName), htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Student.FullName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Course.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Course.StartDate, new { htmlAttributes = new { @class = "form-control",@id="startDate" } })
-                @Html.ValidationMessageFor(model => model.Course.StartDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Course.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Course.EndDate, new { htmlAttributes = new { @class = "form-control",@id="endDate" } })
-                @Html.ValidationMessageFor(model => model.Course.EndDate, "", new { @class = "text-danger" })
+                @Html.DropDownList("StudentId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.StudentId, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Durtation, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Durtation, new { htmlAttributes = new { @class = "form-control", @id="durtation" } })
+                @Html.EditorFor(model => model.Durtation, new { htmlAttributes = new { @class = "form-control", @id = "durtation" } })
                 @Html.ValidationMessageFor(model => model.Durtation, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control",@id = "courseStartDate" } })
+                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control",@id = "courseEndDate" } })
+                @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
         <div class="form-group">
             @Html.LabelFor(model => model.HolidayStartDay, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.HolidayStartDay, new { htmlAttributes = new { @class = "form-control", @id="holidayStartDay" } })
+                @Html.EditorFor(model => model.HolidayStartDay, new { htmlAttributes = new { @class = "form-control", @id = "holidayStartDate" } })
                 @Html.ValidationMessageFor(model => model.HolidayStartDay, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -66,7 +68,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.HolidayEndDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.HolidayEndDate, new { htmlAttributes = new { @class = "form-control",@id="holidayEndDate" } })
+                @Html.EditorFor(model => model.HolidayEndDate, new { htmlAttributes = new { @class = "form-control", @id = "holidayEndDate" } })
                 @Html.ValidationMessageFor(model => model.HolidayEndDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -85,4 +87,6 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/application/durtation.js");
+    
 }

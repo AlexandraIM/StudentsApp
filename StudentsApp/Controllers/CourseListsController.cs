@@ -15,9 +15,15 @@ namespace StudentsApp.Controllers
         private StudentsContext db = new StudentsContext();
 
         // GET: CourseLists
-        public ActionResult Index()
+        public ActionResult Index(string searchStudent)
         {
             var corsesList = db.CorsesList.Include(c => c.Course).Include(c => c.Student);
+
+            if (!String.IsNullOrEmpty(searchStudent))
+            {
+                corsesList = corsesList.Where(s => s.Student.FullName.Contains(searchStudent));
+            }
+            
             return View(corsesList.ToList());
         }
 
@@ -45,12 +51,35 @@ namespace StudentsApp.Controllers
         }
 
         // POST: CourseLists/Create
-        // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
-        // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CourseId,StudentId,Durtation,HolidayStartDay,HolidayEndDate")] CourseList courseList)
+        public ActionResult Create([Bind(Include = "Id,CourseId,StudentId,Durtation,StartDate,EndDate,HolidayStartDay,HolidayEndDate")] CourseList courseList)
         {
+
+            var dates = db.CorsesList.Where(cl => cl.StudentId == courseList.StudentId).Select(x => new { x.StartDate, x.EndDate }).ToList();
+            bool isValid = true;
+            if (dates != null)
+            {
+                
+                dates.ForEach(date => {
+                    if (courseList.StartDate < date.EndDate && date.StartDate < courseList.EndDate)
+                    {
+                        isValid = false;
+                    }
+                });
+            }
+            
+
+            if(isValid == false)
+            {
+                ViewBag.ErroMessage = "You have course on this dates. Choose another!";
+                ViewBag.CourseId = new SelectList(db.Corses, "Id", "CourseName", courseList.CourseId);
+                ViewBag.StudentId = new SelectList(db.Students, "Id", "FullName", courseList.StudentId);
+                return View(courseList);
+            }
+
             if (ModelState.IsValid)
             {
                 db.CorsesList.Add(courseList);
@@ -81,11 +110,11 @@ namespace StudentsApp.Controllers
         }
 
         // POST: CourseLists/Edit/5
-        // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
-        // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CourseId,StudentId,Durtation,HolidayStartDay,HolidayEndDate")] CourseList courseList)
+        public ActionResult Edit([Bind(Include = "Id,CourseId,StudentId,Durtation,StartDate,EndDate,HolidayStartDay,HolidayEndDate")] CourseList courseList)
         {
             if (ModelState.IsValid)
             {

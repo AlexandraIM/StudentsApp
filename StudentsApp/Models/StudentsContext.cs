@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using StudentsApp.Models.DbInitializer;
 using System.Data.Entity;
-using System.Linq;
-using System.Web;
 
 namespace StudentsApp.Models
 {
@@ -10,7 +7,7 @@ namespace StudentsApp.Models
     {
         public StudentsContext() : base("StudentsDB")
         {
-
+            Database.SetInitializer(new StudentsDbInitializer());
         }
 
         public DbSet<Student> Students { get; set; }
