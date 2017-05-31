@@ -27,20 +27,7 @@ namespace StudentsApp.Controllers
             return View(corsesList.ToList());
         }
 
-        // GET: CourseLists/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            CourseList courseList = db.CorsesList.Find(id);
-            if (courseList == null)
-            {
-                return HttpNotFound();
-            }
-            return View(courseList);
-        }
+      
 
         // GET: CourseLists/Create
         public ActionResult Create()
@@ -99,14 +86,14 @@ namespace StudentsApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CourseList courseList = db.CorsesList.Find(id);
-            if (courseList == null)
+            CourseList course = db.CorsesList.Find(id);
+            if (course == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CourseId = new SelectList(db.Corses, "Id", "CourseName", courseList.CourseId);
-            ViewBag.StudentId = new SelectList(db.Students, "Id", "FullName", courseList.StudentId);
-            return View(courseList);
+            ViewBag.CourseId = new SelectList(db.Corses, "Id", "CourseName", course.CourseId);
+            ViewBag.StudentId = new SelectList(db.Students, "Id", "FullName", course.StudentId);
+            return View(course);
         }
 
         // POST: CourseLists/Edit/5
@@ -134,12 +121,12 @@ namespace StudentsApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CourseList courseList = db.CorsesList.Find(id);
-            if (courseList == null)
+            CourseList course = db.CorsesList.Find(id);
+            if (course == null)
             {
                 return HttpNotFound();
             }
-            return View(courseList);
+            return View(course);
         }
 
         // POST: CourseLists/Delete/5
