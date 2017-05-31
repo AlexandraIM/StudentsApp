@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using StudentsApp.Models;
 
@@ -13,7 +11,8 @@ namespace StudentsApp.Controllers
     public class CourseListsController : Controller
     {
         private StudentsContext db = new StudentsContext();
-
+      
+       
         // GET: CourseLists
         public ActionResult Index(string searchStudent)
         {
